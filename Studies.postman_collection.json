@@ -1,0 +1,1396 @@
+{
+  "info": {
+    "_postman_id": "530a5128-83f3-4da2-8625-ddec1197d512",
+    "name": "Studies",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "46398993"
+  },
+  "item": [
+    {
+      "name": "Аунтентификация и выход",
+      "item": [
+        {
+          "name": "Аунтентификация пользователя",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('afterResponse', function () {",
+                  "    pm.environment.set('token_user', pm.response.json().data.user_token);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "followRedirects": true,
+            "disableUrlEncoding": false,
+            "disableCookies": false
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"login\": \"pweimann\",\r\n    \"password\":\"123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/login",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Выход пользователя",
+          "protocolProfileBehavior": {
+            "followRedirects": true,
+            "disableUrlEncoding": false,
+            "disableCookies": false
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token_user}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/logout",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Функционал пользователя",
+      "item": [
+        {
+          "name": "Статус видео",
+          "item": [
+            {
+              "name": "Сделать видео приватным",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/video/5/private",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "video",
+                    "5",
+                    "private"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Удаление видео",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/video/1",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "video",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Сделать видео публичным",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/video/1/public",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "video",
+                    "1",
+                    "public"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Комментарии",
+          "item": [
+            {
+              "name": "Получение комментариев к видео",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/video/23/comment",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "video",
+                    "23",
+                    "comment"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Добавление комментария",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"text\": \"Привет\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/video/3/comment",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "video",
+                    "3",
+                    "comment"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Изменение ответа к комментарию",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"text\":\"\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/answer/2",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "answer",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Добавление ответа к комментарию",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"text\": \"Ответ\" \r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/comment/2/answer",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "comment",
+                    "2",
+                    "answer"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Изменение комментария",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"text\": \"Привет\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/comment/2",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "comment",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Удаление комментария",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/comment/5",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "comment",
+                    "5"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Коллекция чужих плейлистов",
+          "item": [
+            {
+              "name": "Удаление чужого плейлиста из коллекции",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/playlist/2/collection",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "playlist",
+                    "2",
+                    "collection"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Добавление чужого плейлиста в коллекцию",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": ""
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Плейлисты",
+          "item": [
+            {
+              "name": "Просмотр плейлистов пользователя",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/user/5/playlist",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "user",
+                    "5",
+                    "playlist"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Сделать плейлист публичным",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/playlist/1/public",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "playlist",
+                    "1",
+                    "public"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Сделать плейлист приватным",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/playlist/1/private",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "playlist",
+                    "1",
+                    "private"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Изменение плейлиста",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Привет2\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/playlist/3",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "playlist",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Добавление видео в плейлист",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/playlist/2/video/7",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "playlist",
+                    "2",
+                    "video",
+                    "7"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Создание плейлиста",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/playlist",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "playlist"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Удаление видео из плейлиста",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/playlist/1/video/2",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "playlist",
+                    "1",
+                    "video",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Удаление плейлиста",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/playlist/1",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "playlist",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Видео",
+          "item": [
+            {
+              "name": "Просмотр своих плейлистов с конкретным видео",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/user/video/75/playlist",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "user",
+                    "video",
+                    "75",
+                    "playlist"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Просмотр определенных видео",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/video/start/1/count/3",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "video",
+                    "start",
+                    "1",
+                    "count",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Просмотр видео пользователя",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/user/5/videos",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "user",
+                    "5",
+                    "videos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Выбор тэга к видео",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/video/4/tag/2",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "video",
+                    "4",
+                    "tag",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Удаление тэга",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/video/4/tag/2",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "video",
+                    "4",
+                    "tag",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Изменение видео",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "title",
+                      "value": "Егор"
+                    },
+                    {
+                      "key": "description",
+                      "value": "dawd"
+                    },
+                    {
+                      "key": "photo_file",
+                      "type": "file",
+                      "src": "/C:/Users/tujhu/Downloads/Загрузки/Фото/photo_2024-01-08_11-27-03.jpg",
+                      "disabled": true
+                    },
+                    {
+                      "key": "video_file",
+                      "type": "file",
+                      "src": "/C:/Users/tujhu/Videos/Desktop/Desktop 2025.05.30 - 13.18.30.01.mp4",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{host}}/video/5/update",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "video",
+                    "5",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Добавление видео",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "title",
+                      "value": "Навалял братве",
+                      "type": "text",
+                      "uuid": "6285abbc-1fa2-47e7-8e4b-cb2131476700"
+                    },
+                    {
+                      "key": "description",
+                      "value": "Конкретно",
+                      "type": "text",
+                      "uuid": "57c44693-90dd-4953-bae8-d6e6a777989e"
+                    },
+                    {
+                      "key": "video",
+                      "type": "file",
+                      "uuid": "27fda827-ac4f-4035-93b0-e46e5599f484",
+                      "src": "/C:/Users/tujhu/Downloads/Навалял братве — сделано в Clipchamp.mp4"
+                    },
+                    {
+                      "key": "thumbnail",
+                      "type": "file",
+                      "uuid": "fbd630b9-fe89-4f5b-a714-d282e9eedff2",
+                      "src": "/D:/Studies/Заглушка/Заглушка для видео.jpg",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{host}}/video",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "video"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Удаление видео",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/video/28",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "video",
+                    "28"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Подписчики",
+          "item": [
+            {
+              "name": "Отслеживать",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/user/5/follow",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "user",
+                    "5",
+                    "follow"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Перестать отслеживать",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/user/2/unfollow",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "user",
+                    "2",
+                    "unfollow"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Личный кабинет",
+          "item": [
+            {
+              "name": "Изменение данных",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token_user}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Егор"
+                    },
+                    {
+                      "key": "surname",
+                      "value": "Ремизов"
+                    },
+                    {
+                      "key": "patronymic",
+                      "value": "Витальевич"
+                    },
+                    {
+                      "key": "email",
+                      "value": "tujhustify@gmail.com"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{host}}/user/1",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "user",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Просмотр конкретного пользователя",
+              "protocolProfileBehavior": {
+                "followRedirects": true,
+                "disableUrlEncoding": false,
+                "disableCookies": false
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/user/3",
+                  "host": [
+                    "{{host}}"
+                  ],
+                  "path": [
+                    "user",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{token_user}}",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Регистрация",
+          "protocolProfileBehavior": {
+            "followRedirects": true,
+            "disableUrlEncoding": false,
+            "disableCookies": false
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token_user}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "sanek"
+                },
+                {
+                  "key": "surname",
+                  "value": "turcich"
+                },
+                {
+                  "key": "patronymic",
+                  "value": "turshevich"
+                },
+                {
+                  "key": "login",
+                  "value": "r3llax123"
+                },
+                {
+                  "key": "password",
+                  "value": "123123"
+                },
+                {
+                  "key": "email",
+                  "value": "turkevicaleksandr@gmail.com"
+                },
+                {
+                  "key": "photo_file",
+                  "type": "file",
+                  "src": "/C:/Users/tujhu/Downloads/Загрузки/Фото/Rock Lee.png",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{host}}/user",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "user"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
