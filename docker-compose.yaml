@@ -9,7 +9,11 @@ services:
       - ./.docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
       - ./.docker/php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
     command:
-      sh -c "php-fpm"
+      sh -c "
+        mkdir -p storage/app/videos/keys &&
+        php artisan storage:link || true &&
+        php artisan migrate --force &&
+        php-fpm"
 
   frontend:
     build:
